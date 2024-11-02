@@ -13,6 +13,7 @@ class Graph {
         ~Graph();
         void print();
         int count_clicks_1(int k, string type);
+        int count_clicks_2(int k);
 
     private:
         struct Edge {
