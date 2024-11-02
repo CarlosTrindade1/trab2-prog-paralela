@@ -2,7 +2,8 @@
 #include <fstream>
 #include <map>
 #include <cstring>
-#include <pthread.h>
+#include <vector>
+#include <omp.h>
 
 using namespace std;
 
@@ -10,10 +11,10 @@ class Graph {
     public:
         Graph(char *file_name);
         ~Graph();
+        void print();
+        int count_clicks_1(int k, string type);
 
     private:
-        pthread_mutex_t mtx;
-
         struct Edge {
             int id;
             Edge *next;
@@ -29,5 +30,8 @@ class Graph {
 
         void read_graph(char *file_name, map<int, int> new_ids);
         map<int, int> rename_vertices(char *file_name);
-        void print();
+        bool is_on_click(vector<int> click, int vertex);
+        bool makes_a_click(vector<int> click, int vertex);
+        bool is_neighbor(int vertex_1, int vertex_2);
+        int count_clicks(vector<vector<int>> clicks, int k);
 };

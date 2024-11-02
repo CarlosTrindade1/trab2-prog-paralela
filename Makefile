@@ -16,10 +16,10 @@ SOURCE_FILES = $(wildcard $(SOURCE_DIR)/**/*.cpp) main.cpp
 OUTPUT = main
 
 
-all: compile run
+all: compile
 
 compile:
-	${CC} ${INCLUDE_FLAGS} ${SOURCE_FILES} -o ${OUTPUT}
+	${CC} ${INCLUDE_FLAGS} ${SOURCE_FILES} -fopenmp -o ${OUTPUT}
 
 run:
-	./main ./datasets/citeseer.edgelist 3 0 5
+	./main ./datasets/citeseer.edgelist 3 1
