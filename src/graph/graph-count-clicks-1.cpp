@@ -42,7 +42,7 @@ int Graph::count_clicks(vector<vector<int>> clicks, int k) {
     return counter;
 }
 
-int Graph::count_clicks_1(int k, string type) {
+int Graph::count_clicks_1(int k, string type, int chunk) {
     int total_counter = 0;
     vector<vector<int>> clicks(num_vertices, vector<int>(1));
 
@@ -52,7 +52,7 @@ int Graph::count_clicks_1(int k, string type) {
     }
 
     if (type == "static") {
-        #pragma omp parallel for schedule(static) reduction(+:total_counter)
+        #pragma omp parallel for schedule(static, chunk) reduction(+:total_counter)
         for (int i = 0; i < clicks.size(); i++) {
             vector<vector<int>> local_clicks;
 
@@ -64,7 +64,7 @@ int Graph::count_clicks_1(int k, string type) {
             total_counter += counter;
         }
     } else if (type == "dynamic") {
-        #pragma omp parallel for schedule(dynamic) reduction(+:total_counter)
+        #pragma omp parallel for schedule(dynamic, chunk) reduction(+:total_counter)
         for (int i = 0; i < clicks.size(); i++) {
             vector<vector<int>> local_clicks;
 
@@ -76,7 +76,7 @@ int Graph::count_clicks_1(int k, string type) {
             total_counter += counter;
         }
     } else if (type == "guided") {
-        #pragma omp parallel for schedule(guided) reduction(+:total_counter)
+        #pragma omp parallel for schedule(guided, chunk) reduction(+:total_counter)
         for (int i = 0; i < clicks.size(); i++) {
             vector<vector<int>> local_clicks;
 

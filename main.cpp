@@ -23,6 +23,7 @@ int main(int argc, char* argv[]) {
     int size_of_click = atoi(argv[2]);
     int algorithm = atoi(argv[3]);
     string type;
+    int chunk;
 
     Graph *graph = new Graph(file_name_graph);
 
@@ -35,10 +36,16 @@ int main(int argc, char* argv[]) {
                 return 1;
             }
 
+            if (!argv[5]) {
+                printf("Chunk não foi informado\n");
+                return 1;
+            }
+
             type = argv[4];
+            chunk = atoi(argv[5]);
 
             start = chrono::high_resolution_clock::now();
-            cout << graph->count_clicks_1(size_of_click, type) << endl;
+            cout << graph->count_clicks_1(size_of_click, type, chunk) << endl;
             end = chrono::high_resolution_clock::now();
             break;
 
