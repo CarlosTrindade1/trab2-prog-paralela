@@ -24,6 +24,7 @@ int main(int argc, char* argv[]) {
     int algorithm = atoi(argv[3]);
     string type;
     int chunk;
+    int r;
 
     Graph *graph = new Graph(file_name_graph);
 
@@ -50,7 +51,16 @@ int main(int argc, char* argv[]) {
             break;
 
         case 2:
-            printf("Algoritmo 2\n");
+            if (!argv[4]) {
+                printf("Parâmetro r não informado\n");
+                return 1;
+            }
+
+            r = atoi(argv[4]);
+
+            start = chrono::high_resolution_clock::now();
+            cout << graph->count_clicks_2(size_of_click, r) << endl;
+            end = chrono::high_resolution_clock::now();
 
             break;
 
