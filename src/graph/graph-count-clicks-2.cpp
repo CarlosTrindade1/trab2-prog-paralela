@@ -51,8 +51,8 @@ int Graph::count_clicks_balanced(vector<vector<int>> *clicks, vector<vector<vect
             #pragma omp critical
             {
                 for (int i = 0; i < omp_get_max_threads(); i++) {
-                    if (global_clicks->at(i).size() > max) {
-                        max = global_clicks->at(i).size();
+                    if (global_clicks[i].size() > max) {
+                        max = global_clicks[i].size();
                         thread_id = i;
                     }
                 }
@@ -61,8 +61,8 @@ int Graph::count_clicks_balanced(vector<vector<int>> *clicks, vector<vector<vect
                     int length = r > max ? max - 1 : r;
 
                     for (int i = 0; i < length; i++) {
-                        clicks->push_back(global_clicks->at(thread_id).back());
-                        global_clicks->at(thread_id).pop_back();
+                        clicks->push_back(global_clicks[thread_id][i].back());
+                        global_clicks[thread_id][i].pop_back();
                     }
                 }
             }
