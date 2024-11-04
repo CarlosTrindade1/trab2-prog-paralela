@@ -88,7 +88,7 @@ int Graph::count_clicks_2(int k, int r) {
         global_clicks.push_back(vector<vector<int>>());
     }
 
-    #pragma omp parallel for schedule(static) reduction(+:total_counter)
+    #pragma omp parallel for reduction(+:total_counter)
     for (int i = 0; i < clicks.size(); i++) {
         int thread_id = omp_get_thread_num();
 
