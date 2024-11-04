@@ -57,7 +57,7 @@ int Graph::count_clicks_balanced(vector<vector<int>> *clicks, vector<vector<vect
                     }
                 }
 
-                if (max > 0) {
+                if (max > 10) {
                     int length = r > max ? max - 1 : r;
 
                     for (int i = 0; i < length; i++) {
